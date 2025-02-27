@@ -19,7 +19,7 @@ BQ_TABLE = os.getenv("BQ_TABLE_EX_ORCAMENTARIA")
 
 default_args = {
     "owner": "airflow",
-    "start_date": datetime(2024, 1, 1),
+    "start_date": datetime(2023, 1, 1),
     "retries": 3,
     "retry_delay": timedelta(minutes=5),
 }
@@ -34,7 +34,7 @@ def exec_orcamentaria_dag():
     @task()
     def download_task(**kwargs):
         logical_date = kwargs["logical_date"]
-        download_csv_from_url(download_date, conjunto="receitas_execucao", local_csv_path="/tmp/receitas_execucao_dadospb.csv")
+        download_csv_from_url(logical_date, conjunto="receitas_execucao", local_csv_path="/tmp/receitas_execucao_dadospb.csv")
         return "/tmp/receitas_execucao_dadospb.csv"
 
     @task()
